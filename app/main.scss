@@ -1,0 +1,112 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+$activeElement:   #159ECB;
+$darkBlue:        #00526C;
+$backgroundGray:  #F6F4F0;
+$hoverElement:    #00B5EF;
+
+$successBackground: #E6FEC4;
+$successBorder:     #AFDC72;
+$errorBackground:   #FFE9E9;
+$errorBorder:       #E09191;
+
+$aipal:                 #F38019;
+$aitu:                  #E5001C;
+$arvo:                  #7BBE31;
+$eperusteet:            #FECD0A;
+$koski:                 #149940;
+$oikeustulkkirekisteri: #898989;
+$oiva:                  #7E007E;
+$opintopolku:           #3B7ADB;
+$valtionavaustukset:    #211B81;
+
+
+body{
+  background: #F6F4F0;
+  padding: 2em;
+  max-width: 1300px;
+}
+
+.text-input{
+    width: 100%;
+    font-size: 15px;
+    color: #2B2B2B;
+    letter-spacing: 0px;
+    line-height: 40px;
+    height: 40px;
+    padding-left: 10px;
+    &:-ms-input-placeholder {
+      color: #999;
+    }
+
+  &:focus{
+    background: #E7F9FF;
+  }
+}
+
+.notification{
+  padding:5px;
+  border: 2px solid black;
+  height: 50px;
+  margin-bottom:5px;
+  .details{
+    float: left;
+    & label{
+      display: inline-block;
+      width:20px;
+      margin: 0;
+    }
+  }
+  .controls{
+    text-align: right;
+  }
+
+}
+
+.btn-delete{
+  background-color: red;
+  color: white;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.btn-edit{
+  background-color: $activeElement;
+  color: white;
+  margin-right: 1px;
+  margin-left: 1px;
+}
+
+.btn-add {
+  color: #FFFFFF;
+  background-color: $activeElement;
+  width: 20%;
+  height: 60px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight:600;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-top: 10px;
+  border: 0;
+  margin-right: 5px;
+  &:hover{
+    background: $hoverElement;
+    color: #FFFFFF;
+  }
+  &:focus{
+    background: $hoverElement;
+  }
+}
+
+.editNotification{
+  clear: both;
+
+  & div{
+    margin-bottom: 5px;
+
+  }
+}
