@@ -29,7 +29,7 @@ public class NotificationsService {
         mapper.registerModule(new JavaslangModule());
         try {
             String userHome = System.getProperty("user.home");
-            String PROPERTY_FILE = "login-notifications.properties";
+            String PROPERTY_FILE = "common.properties";
             File file = new File(userHome + "/oph-configuration/" + PROPERTY_FILE);
             props.load(new FileInputStream(file));
         } catch (IOException e) {
@@ -47,7 +47,7 @@ public class NotificationsService {
 
     private List<Notification> readFile(){
         Try<List<Notification>> notifications = Try.of(() -> {
-            String filePath = props.getProperty("filePath");
+            String filePath = props.getProperty("loginNotificationsFilePath");
             return mapper.readValue(new File(filePath), new TypeReference<List<Notification>>(){});
         });
 
