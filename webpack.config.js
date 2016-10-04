@@ -1,19 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const validate = require('webpack-validator');
-var DeployToWar = require('webpack-deploy2war');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
-//var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 const webpack = require('webpack')
 
 const PATHS = {
-  webapp: path.join(__dirname, 'src/main/webapp/app'),
+  webapp: path.join(__dirname, 'src/main/webapp/app/'),
   app: path.join(__dirname, 'app'),
   style: path.join(__dirname, 'app', 'main.scss'),
   images: path.join(__dirname, 'app/resources/img')
-
 };
 
 var config = {
@@ -72,7 +69,6 @@ var config = {
   },
 
   plugins: [
-    //new LiveReloadPlugin({appendScriptTag:true}),
     new ExtractTextPlugin("[name].css"),
     new CleanWebpackPlugin([PATHS.webapp], {
       root: process.cwd()
