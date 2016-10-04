@@ -22,15 +22,20 @@ import java.util.concurrent.atomic.AtomicReference;
 @Path("/")
 public class NotificationsService {
 
-    private ObjectMapper mapper = new ObjectMapper();
-    private String filePath = "";
-    private AtomicReference<List<Notification>> notifications = new AtomicReference<>();
-
-    private Logger log = LoggerFactory.getLogger("login-notifications");
+    //TODO: something less ugly
+    private static ObjectMapper mapper = new ObjectMapper();
+    private static String filePath = "";
+    private static AtomicReference<List<Notification>> notifications = new AtomicReference<>();
+    private static Logger log = LoggerFactory.getLogger("login-notifications");
 
     public NotificationsService() {
+        if(notifications.get() == null){
+            init();
+        }
+    }
+    
+    private void init(){
         mapper.registerModule(new JavaslangModule());
-
         try {
             String userHome = System.getProperty("user.home");
             String PROPERTY_FILE = "common.properties";
