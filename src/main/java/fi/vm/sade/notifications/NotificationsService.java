@@ -21,17 +21,19 @@ import java.util.concurrent.atomic.AtomicReference;
 public class NotificationsService {
 
     private ObjectMapper mapper = new ObjectMapper();
-    private Properties props = new Properties();
-
+    private String filePath = "";
     private AtomicReference<List<Notification>> notifications = new AtomicReference<>();
 
     public NotificationsService() {
         mapper.registerModule(new JavaslangModule());
+
         try {
             String userHome = System.getProperty("user.home");
             String PROPERTY_FILE = "common.properties";
             File file = new File(userHome + "/oph-configuration/" + PROPERTY_FILE);
+            Properties props = new Properties();
             props.load(new FileInputStream(file));
+            filePath = props.getProperty("loginNotificationsFilePath");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,17 +48,11 @@ public class NotificationsService {
     }
 
     private List<Notification> readFile(){
-        Try<List<Notification>> notifications = Try.of(() -> {
-            String filePath = props.getProperty("loginNotificationsFilePath");
-            return mapper.readValue(new File(filePath), new TypeReference<List<Notification>>(){});
-        });
-
+        Try<List<Notification>> notifications = Try.of(() -> mapper.readValue(new File(filePath), new TypeReference<List<Notification>>(){}));
         return notifications.getOrElse(List.empty());
     }
 
     private void writeFile(){
-        System.out.println("WRITING FILE");
-        String filePath = props.getProperty("filePath");
         File file = new File(filePath);
         Try.run(() -> mapper.writeValue(file, notifications.get()));
     }
