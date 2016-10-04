@@ -37,4 +37,8 @@ public class Notification {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String toString(){
+        return "id: " + id + " fi: " + text_fi + " sv: " + text_sv;
+    }
 }

@@ -6,6 +6,8 @@ import javaslang.collection.List;
 import javaslang.control.Option;
 import javaslang.control.Try;
 import javaslang.jackson.datatype.JavaslangModule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,6 +26,8 @@ public class NotificationsService {
     private String filePath = "";
     private AtomicReference<List<Notification>> notifications = new AtomicReference<>();
 
+    private Logger log = LoggerFactory.getLogger("login-notifications");
+
     public NotificationsService() {
         mapper.registerModule(new JavaslangModule());
 
@@ -39,6 +43,7 @@ public class NotificationsService {
         }
 
         notifications.set(readFile());
+        log.info("Service started");
     }
 
     private String toJson(Object o){
@@ -49,24 +54,28 @@ public class NotificationsService {
 
     private List<Notification> readFile(){
         Try<List<Notification>> notifications = Try.of(() -> mapper.readValue(new File(filePath), new TypeReference<List<Notification>>(){}));
+        log.info("Reading notifications from file:"+filePath);
         return notifications.getOrElse(List.empty());
     }
 
     private void writeFile(){
         File file = new File(filePath);
+        log.info("Writing notifications to file: "+filePath);
         Try.run(() -> mapper.writeValue(file, notifications.get()));
     }
 
     private void addNotification(Notification notification){
-        int maxId = this.notifications.get().map(Notification::getId).max().getOrElse(0);
-        List<Notification> currentNotifications = this.notifications.get();
+        int maxId = notifications.get().map(Notification::getId).max().getOrElse(0);
+        List<Notification> currentNotifications = notifications.get();
         notification.setId(maxId + 1);
-        this.notifications.set(currentNotifications.append(notification));
+        log.info("Adding notification: "+notification);
+        notifications.set(currentNotifications.append(notification));
     }
 
     private void updateNotification(Notification notification){
-        List<Notification> currentNotifications = this.notifications.get();
+        List<Notification> currentNotifications = notifications.get();
         List<Notification> newNotifications = currentNotifications.filter(n -> n.getId() != notification.getId()).append(notification);
+        log.info("Updating notification: "+notification);
         notifications.set(newNotifications);
     }
 
@@ -82,6 +91,7 @@ public class NotificationsService {
     public Response delete(@PathParam("id") int id){
         List<Notification> currentNotifications = notifications.get();
         List<Notification> newNotifications = currentNotifications.filter(n -> n.getId() != id);
+        log.info("Deleting notification: " + id);
         notifications.set(newNotifications);
         writeFile();
         return notifications();
