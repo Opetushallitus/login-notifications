@@ -42,11 +42,11 @@ var config = {
         loader: "json-loader"
       },
       {
-        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+        test: /\.woff2?$|\.ttf$|\.eot$/,
         loader: "file"
       },
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|png|gif|svg)$/,
         loader: 'file',
         include: PATHS.images
       },
