@@ -1,0 +1,36 @@
+sudo: required
+language: java
+jdk:
+  - oraclejdk8
+services:
+  - docker
+cache:
+  directories:
+    - $HOME/.m2
+env:
+  global:
+    # AWS_ACCESS_KEY_ID
+    - secure: "zGvlBBmASMNfeK4ntK5N0V0ydnC5HGvuckFXs5fharSLA8VESzVaXaxqVE7LaC5+Xss9V6FcfB+oS3Q89usQOyggdaxXytaVJjrwvpEEoOs45YEH9pwk/Dl/U7KNe1+Ej9Zw5YByCfd6uOXk8rKZRThgaoVPpRyA1f7GAgXgyS7btf4lmr4ntIph9X9gSjHCkhmPwfrCIv2A5OyT9K1rSKEfVuk6S/LlBUQRPzFPoxdygpKFrGil+MCOqQpuJsEehsNf6vbpKZ9yoDDOr2yd5m192BxprtzhZnV6Sg8XtZGklghNaDm1KBMrh/wKcc3Besa/IVkeZ54nTxzfLFtDunYv3a0vWn8lH62SuilFFtlw3qaGtCe+p3xp5icMC1vtYC0cFbhrc3GnqT6ALYgA/OxnyK5eTR6WGtpEFuuSF47FFx56ASSAvB7Aktdb9YoKyGpySXB44WRYJWg6EAwl0U1TNVrWR6dC0HIDNCTri4NZ8StheqUdxHsjQG4CXbt4KhTzUtJIDAgGApthJy2hnhmGkBxdmXvPma/w32OJjXmMeVArQI4T/vhJ7AF62563HghToZjrfJz3aTE9W9C/izFGMbUMVFx4YN+F5XZq5QyEWYNDPzINFCAuHCxxxENJg3iNHrk3xQHFXSe/AzF4NxYKs99OMHSoIeqweprghTM="
+    # AWS_SECRET_ACCESS_KEY
+    - secure: "TyJMaGE3oga3Pggm1xTyEHqqtzQAmyD88APF1eZ1LEStgMqXRXgsFH1jjxsmrcXyYuc48HpZZekANyS9RFKDAWe1Tgisu2Cw2SQBSvv0bO4Jiw1bfw1TRnCd5JGOh68TcBvYOFUIHzBflGnN59xKkTSTZiCWh+fquCFz6/aaNndHAyzA9YFiFqq6pGjXAO4MfldaGivangAmO7TEHGM0AGphsBElVCCg+cPsENkhJ7jy0w1HCNkc3e+Xv87D1EkzchiYB/RWduV0m0lZyKLlwGmDQ7W2rtqXuqzjJDzEj5vwrIyg3+YiJDo0SDzg3XcwLSJH8XZro7BsBFIWHn8DGi+6WBA4gVCrOnVXKvk/DD0qL8K6kau6V8TkYd8TLZZtAPwOn6jHJ0TuqBQdbmMWsXBXl59xlgk9QoEkUFIm+CifKEr4Fhj/JSPyl5AoSLSZkG7vUgCW3YG4ogQCoYJMhuARxD8XJglAHy71lWMe6G+VzzGWpBYiN8Hhv7KaXSDBQv40ChV5qOqVj4cmGj97xi/AOEYuK99P9CB0Hx3UH775SmCbdLKo4T8zHlguTcMiW5lJQy071Y83yJU4UYmoaTCZcs2zMexo2mqIz+rkJ8ri/0yoShC2LrGkvNT/wc2eS5X4pHKqau7ajDph5jrxLcxtFk6LfdXGQgXgQhRPOlI="
+
+install:
+  - git clone https://github.com/Opetushallitus/ci-tools.git
+  - source ci-tools/common/setup-tools.sh
+  - export ARTIFACT_NAME="login-notifications"
+
+script:
+  - mvn clean install -B -Dbranch=${TRAVIS_BRANCH} -Drevision=${TRAVIS_COMMIT} -DbuildNumber=${TRAVIS_BUILD_NUMBER}
+
+  - mv target/login-notifications-*.war $DOCKER_BUILD_DIR/artifact/$ARTIFACT_NAME.war
+  - cp -vr oph-configuration $DOCKER_BUILD_DIR/config/
+
+  - export BASE_IMAGE="baseimage-war:master"
+  - ./ci-tools/common/pull-image.sh
+  - ./ci-tools/build/build-war.sh $ARTIFACT_NAME
+
+deploy:
+  - provider: script
+    script: ./ci-tools/build/upload-image.sh $ARTIFACT_NAME
+    on:
+      all_branches: true
