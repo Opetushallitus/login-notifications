@@ -40,11 +40,12 @@
     "bluebird": "^2.9.34",
     "bootstrap": "^4.0.0-alpha.2",
     "classnames": "^2.2.5",
-    "lodash": "^4.15.0",
     "flat": "^1.6.0",
     "html-webpack-plugin": "^2.22.0",
+    "lodash": "^4.15.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.30.3",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "universal-cookie": "^4.0.4"
   }
 }

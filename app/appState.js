@@ -3,7 +3,14 @@ import Promise from 'bluebird'
 import Dispatcher from './dispatcher'
 import axios from 'axios'
 import {initController} from './controller'
+import Cookies from 'universal-cookie'
 
+const cookies = new Cookies();
+axios.interceptors.request.use(config => {
+    config.headers['Caller-Id'] = '1.2.246.562.10.00000000001.login-notifications';
+    config.headers['CSRF'] = cookies.get('CSRF');
+    return config;
+});
 
 const ax = Promise.promisifyAll(axios);
 const dispatcher = new Dispatcher;
