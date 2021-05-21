@@ -32,6 +32,12 @@
             <version>${jersey.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
@@ -94,6 +100,22 @@
                                 <directory>node_modules</directory>
                             </fileset>
                         </filesets>
+                    </configuration>
+                </plugin>
+                <plugin><!-- "mvn cargo:run" käynnistää serverin -->
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven3-plugin</artifactId>
+                    <version>1.9.4</version>
+                    <configuration>
+                        <container>
+                            <containerId>tomcat7x</containerId>
+                            <type>installed</type>
+                        </container>
+                        <configuration>
+                            <properties>
+                                <cargo.servlet.port>8081</cargo.servlet.port>
+                            </properties>
+                        </configuration>
                     </configuration>
                 </plugin>
             </plugins>
