@@ -66,6 +66,7 @@ var config = {
     hot: true,
     inline: true,
     stats: 'errors-only',
+    proxy: { "/api/**": { target: 'http://localhost:8081/login-notifications', secure: false }  }
   },
 
   plugins: [
