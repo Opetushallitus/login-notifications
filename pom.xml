@@ -12,7 +12,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>11</maven.compiler.release>
         <buildversion_prefix />
-        <jackson.version>2.12.3</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
         <javaslang.version>2.0.5</javaslang.version>
         <jersey.version>2.34</jersey.version>
         <logback.version>1.2.3</logback.version>
