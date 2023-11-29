@@ -15,7 +15,7 @@
         <jackson.version>2.12.3</jackson.version>
         <javaslang.version>2.0.5</javaslang.version>
         <jersey.version>2.34</jersey.version>
-        <logback.version>1.2.3</logback.version>
+        <logback.version>1.3.12</logback.version>
         <slf4j.version>1.7.30</slf4j.version>
     </properties>
 
