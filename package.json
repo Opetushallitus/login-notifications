@@ -44,7 +44,7 @@
     "html-webpack-plugin": "^2.22.0",
     "lodash": "^4.15.0",
     "react": "^15.1.0",
-    "react-bootstrap": "^0.30.3",
+    "react-bootstrap": "^0.33.1",
     "react-dom": "^15.1.0",
     "universal-cookie": "^4.0.4"
   }
