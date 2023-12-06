@@ -11,11 +11,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <buildversion_prefix />
+        <buildversion_prefix/>
         <jackson.version>2.12.3</jackson.version>
         <javaslang.version>2.0.5</javaslang.version>
         <jersey.version>2.34</jersey.version>
-        <logback.version>1.2.3</logback.version>
+        <logback.version>1.2.13</logback.version>
         <slf4j.version>1.7.30</slf4j.version>
     </properties>
 
@@ -139,7 +139,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <echo message="writing target/${project.build.finalName}/${buildversion_prefix}buildversion.txt" />
+                                <echo message="writing target/${project.build.finalName}/${buildversion_prefix}buildversion.txt"/>
                                 <echo file="target/${project.build.finalName}/${buildversion_prefix}buildversion.txt">
                                     <![CDATA[artifactId=${project.artifactId}
 version=${project.version}
@@ -149,8 +149,8 @@ vcsRevision=${revision}
 buildTtime=${maven.build.timestamp}
 ]]>
                                 </echo>
-                                <loadfile property="buildversiontxt" srcFile="target/${project.build.finalName}/${buildversion_prefix}buildversion.txt" />
-                                <echo message="${buildversiontxt}" />
+                                <loadfile property="buildversiontxt" srcFile="target/${project.build.finalName}/${buildversion_prefix}buildversion.txt"/>
+                                <echo message="${buildversiontxt}"/>
                                 <echo file="target/mavenversion.txt">${project.version}</echo>
                             </target>
                         </configuration>
