@@ -12,11 +12,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>11</maven.compiler.release>
         <buildversion_prefix />
-        <jackson.version>2.12.3</jackson.version>
         <javaslang.version>2.0.5</javaslang.version>
         <jersey.version>2.34</jersey.version>
-        <logback.version>1.2.3</logback.version>
-        <slf4j.version>1.7.30</slf4j.version>
     </properties>
 
     <dependencies>
@@ -39,7 +36,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.12.7.1</version>
         </dependency>
         <dependency>
             <groupId>io.javaslang</groupId>
@@ -54,12 +51,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <version>1.2.13</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <version>1.7.30</version>
         </dependency>
     </dependencies>
 
