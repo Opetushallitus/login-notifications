@@ -40,7 +40,7 @@ jobs:
       - name: Cache artifact for next step
         uses: actions/cache@v4
         with:
-          path: target/login-notifications-*.war
+          path: target
           key: ${{ github.sha }}
 
   deploy-container:
