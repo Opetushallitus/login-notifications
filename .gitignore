@@ -4,3 +4,4 @@ src/main/webapp/app
 
 *.iml
 .idea
+.DS_Store
