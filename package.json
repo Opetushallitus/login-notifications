@@ -40,7 +40,7 @@
     "bluebird": "^2.9.34",
     "bootstrap": "^4.0.0-alpha.2",
     "classnames": "^2.2.5",
-    "flat": "^1.6.0",
+    "flat": "^5.0.1",
     "html-webpack-plugin": "^2.22.0",
     "lodash": "^4.15.0",
     "react": "^15.1.0",
